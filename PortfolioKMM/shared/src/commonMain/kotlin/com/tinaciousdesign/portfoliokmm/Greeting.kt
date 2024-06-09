@@ -1,11 +1,16 @@
 package com.tinaciousdesign.portfoliokmm
 
 import com.tinaciousdesign.portfoliokmm.networking.ApiClient
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class Greeting {
-    private val platform: Platform = getPlatform()
-//    private val client = HttpClient()
-    private val apiClient = ApiClient()
+/**
+ * This is no longer used in the project.
+ * @deprecated
+ */
+class Greeting : KoinComponent {
+    private val platform by inject<Platform>()
+    private val apiClient by inject<ApiClient>()
 
     fun greet(): String {
         return "Hello, ${platform.name}!"

@@ -14,14 +14,14 @@ extension ContentView {
         @Published var text = "Loading..."
 
         init() {
-            Greeting().ktorDocs() { greeting, error in
-                DispatchQueue.main.async {
-                    if let greeting = greeting {
-                        self.text = greeting
-                    } else {
-                        self.text = error?.localizedDescription ?? "error"
-                    }
+            ApiUtils().getPortfolioItems { items, error in
+                if let items = items {
+                    self.text = items.map { $0.title }.joined(separator: "")
+//                    self.text = items.joined(separator: "")
+                } else {
+                    self.text = error?.localizedDescription ?? "unknown error"
                 }
+
             }
         }
     }
