@@ -36,6 +36,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.koin.core)
             implementation(libs.koin.test)
+            implementation(libs.kermit)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)

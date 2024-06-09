@@ -1,5 +1,6 @@
 package com.tinaciousdesign.portfoliokmm.networking
 
+import co.touchlab.kermit.Logger
 import com.tinaciousdesign.portfoliokmm.networking.requests.ApiResponse
 import com.tinaciousdesign.portfoliokmm.networking.requests.GetPortfolioItems
 import com.tinaciousdesign.portfoliokmm.networking.requests.GetServices
@@ -36,6 +37,7 @@ class ApiClient {
             val res = client.get(GetPortfolioItems()).body<ApiResponse<List<PortfolioItem>>>()
             Result.success(res.data)
         } catch (e: Exception) {
+            Logger.e(e) { "Cannot get portfolio items" }
             Result.failure(e)
         }
 
@@ -44,6 +46,7 @@ class ApiClient {
             val res = client.get(GetServices()).body<ApiResponse<List<ServiceItem>>>()
             Result.success(res.data)
         } catch (e: Exception) {
+            Logger.e(e) { "Cannot get services" }
             Result.failure(e)
         }
 
@@ -52,6 +55,7 @@ class ApiClient {
             val res = client.get(GetTechnologies()).body<ApiResponse<List<TechnologyItem>>>()
             Result.success(res.data)
         } catch (e: Exception) {
+            Logger.e(e) { "Cannot get technologies" }
             Result.failure(e)
         }
 }
