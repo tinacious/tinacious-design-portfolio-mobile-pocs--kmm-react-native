@@ -46,5 +46,6 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.koin.android)
+    implementation(libs.coil.compose)
     debugImplementation(libs.compose.ui.tooling)
 }

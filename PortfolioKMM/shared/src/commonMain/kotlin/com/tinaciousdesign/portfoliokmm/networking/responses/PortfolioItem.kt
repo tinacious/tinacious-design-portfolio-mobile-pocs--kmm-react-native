@@ -10,6 +10,7 @@ data class PortfolioItem(
     val showLaunchDate: Boolean,
     val isFeatured: Boolean? = false,
     val contentHtml: String,
+    val excerptHtml: String,
     val website: String,
     val categories: List<Category>,
     val images: List<Image>,
