@@ -14,13 +14,17 @@ import coil.compose.AsyncImage
 import com.tinaciousdesign.portfoliokmm.networking.responses.PortfolioItem
 
 @Composable
-fun PortfolioItemCard(portfolioItem: PortfolioItem) {
+fun PortfolioItemCard(
+    portfolioItem: PortfolioItem,
+    modifier: Modifier = Modifier
+) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
         ),
         modifier = Modifier
             .fillMaxWidth()
+            .then(modifier)
     ) {
         AsyncImage(
             model = portfolioItem.featuredImage.url,

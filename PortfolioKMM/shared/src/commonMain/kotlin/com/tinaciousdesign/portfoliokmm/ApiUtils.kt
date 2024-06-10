@@ -10,15 +10,40 @@ import org.koin.core.component.inject
 class ApiUtils : KoinComponent {
     private val apiClient by inject<ApiClient>()
 
+    private var cachedPortfolioItems = listOf<PortfolioItem>()
+    private var cachedTechnologyItems = listOf<TechnologyItem>()
+    private var cachedServices = listOf<ServiceItem>()
+
     suspend fun getTechnologies(): List<TechnologyItem> {
-        return apiClient.getTechnologies().getOrElse { emptyList() }
+        if (cachedTechnologyItems.isNotEmpty()) {
+            return cachedTechnologyItems
+        }
+
+        val results = apiClient.getTechnologies().getOrElse { emptyList() }
+        cachedTechnologyItems = results
+
+        return cachedTechnologyItems
     }
 
     suspend fun getServices(): List<ServiceItem> {
-        return apiClient.getServices().getOrElse { emptyList() }
+        if (cachedServices.isNotEmpty()) {
+            return cachedServices
+        }
+
+        val results = apiClient.getServices().getOrElse { emptyList() }
+        cachedServices = results
+
+        return cachedServices
     }
 
     suspend fun getPortfolioItems(): List<PortfolioItem> {
-        return apiClient.getPortfolioItems().getOrElse { emptyList() }
+        if (cachedPortfolioItems.isNotEmpty()) {
+            return cachedPortfolioItems
+        }
+
+        val results = apiClient.getPortfolioItems().getOrElse { emptyList() }
+        cachedPortfolioItems = results
+
+        return cachedPortfolioItems
     }
 }
