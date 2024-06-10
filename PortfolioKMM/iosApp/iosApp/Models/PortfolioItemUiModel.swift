@@ -1,11 +1,3 @@
-//
-//  PortfolioItemUiModel.swift
-//  iosApp
-//
-//  Created by tina on 2024-06-10.
-//  Copyright © 2024 orgName. All rights reserved.
-//
-
 import Foundation
 
 struct PortfolioItemUiModel: Identifiable {
