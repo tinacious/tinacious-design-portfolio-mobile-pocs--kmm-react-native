@@ -10,14 +10,16 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
+import com.tinaciousdesign.portfoliokmm.android.utils.openExternalBrowser
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf<Route>(
-        Route.PortfolioScreen,
-        Route.ServicesScreen,
-        Route.TechnologiesScreen,
-        Route.AboutScreen,
+        Route.PortfolioRoute,
+//        Route.ServicesScreen,
+//        Route.TechnologiesScreen,
+        Route.CodeRoute,
+        Route.AboutRoute,
     )
     var selectedItem by remember { mutableIntStateOf(0) }
 
@@ -40,15 +42,28 @@ fun BottomNavigationBar(navController: NavController) {
                 label = { Text(item.title) },
                 selected = selectedItem == index,
                 onClick = {
-                    selectedItem = index
-                    navController.navigate(item) {
-                        navController.graph.startDestinationRoute?.let { route ->
-                            popUpTo(route) {
-                                saveState = true
+                    // Some items are external links
+                    when (item) {
+                        Route.CodeRoute -> {
+                            navController.context.openExternalBrowser((item as Route.CodeRoute).externalUrl)
+                        }
+                        Route.AboutRoute -> {
+                            navController.context.openExternalBrowser((item as Route.AboutRoute).externalUrl)
+                        }
+                        // These ones have normal routes
+                        else -> {
+                            selectedItem = index
+
+                            navController.navigate(item) {
+                                navController.graph.startDestinationRoute?.let { route ->
+                                    popUpTo(route) {
+                                        saveState = true
+                                    }
+                                }
+                                launchSingleTop = true
+                                restoreState = true
                             }
                         }
-                        launchSingleTop = true
-                        restoreState = true
                     }
                 }
             )

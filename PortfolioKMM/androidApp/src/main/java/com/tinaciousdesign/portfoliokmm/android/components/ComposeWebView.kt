@@ -10,6 +10,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
+import com.tinaciousdesign.portfoliokmm.android.utils.openExternalBrowser
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
@@ -20,10 +21,7 @@ fun ComposeWebView(url: String) {
         WebView(it).apply {
             webChromeClient = CustomWebViewClient(url) { externalUrl ->
                 try {
-                    val intent = Intent(Intent.ACTION_VIEW).apply {
-                        data = Uri.parse(externalUrl)
-                    }
-                    context.startActivity(intent)
+                    context.openExternalBrowser(externalUrl)
                 } catch (e: Exception) {
                     Log.e(tag, "Cannot open external link: $externalUrl")
                 }

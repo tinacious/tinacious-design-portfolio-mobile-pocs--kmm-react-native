@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.tinaciousdesign.portfoliokmm.ApiUtils
 import com.tinaciousdesign.portfoliokmm.android.screens.AboutScreen
+import com.tinaciousdesign.portfoliokmm.android.screens.EmptyScreen
 import com.tinaciousdesign.portfoliokmm.android.screens.HomeScreen
 import com.tinaciousdesign.portfoliokmm.android.screens.PortfolioDetailScreen
 import com.tinaciousdesign.portfoliokmm.android.screens.ServicesScreen
@@ -20,40 +21,47 @@ fun NavigationRouter(
 ) {
     val TAG = "MainActivity"
 
-    NavHost(navController, startDestination = Route.PortfolioScreen) {
-        composable<Route.PortfolioScreen> { backStackEntry ->
+    NavHost(navController, startDestination = Route.PortfolioRoute) {
+        composable<Route.PortfolioRoute> { backStackEntry ->
             HomeScreen(
                 apiUtils = apiUtils,
                 onPortfolioItemClicked = { portfolioItem ->
                     Log.d(TAG, "TODO: handle portfolio item clicked: $portfolioItem")
                     // Ideally we can use Parcelable and Parcelize for KMM classes
-                    val route = Route.PortfolioDetailScreen(portfolioItem.toJson())
+                    val route = Route.PortfolioDetailRoute(portfolioItem.toJson())
                     navController.navigate(route)
                 },
             )
         }
-        composable<Route.PortfolioDetailScreen> { backStackEntry ->
-            val route = backStackEntry.toRoute<Route.PortfolioDetailScreen>()
+        composable<Route.PortfolioDetailRoute> { backStackEntry ->
+            val route = backStackEntry.toRoute<Route.PortfolioDetailRoute>()
             PortfolioDetailScreen(route.portfolioItemJson, navController)
         }
 
-        composable<Route.ServicesScreen> {
-            ServicesScreen(
+        composable<Route.ServicesRoute> {
+            EmptyScreen()
+            /*ServicesScreen(
                 apiUtils = apiUtils,
                 onServiceClicked = { service ->
                     Log.d(TAG, "onServiceClicked: $service")
                 }
-            )
+            )*/
         }
 
-        composable<Route.TechnologiesScreen> {
-            TechnologiesScreen(
-                apiUtils = apiUtils,
-            )
+        composable<Route.TechnologiesRoute> {
+            EmptyScreen()
+//            TechnologiesScreen(
+//                apiUtils = apiUtils,
+//            )
         }
 
-        composable<Route.AboutScreen> {
-            AboutScreen()
+        composable<Route.CodeRoute> {
+            EmptyScreen()
+        }
+
+        composable<Route.AboutRoute> {
+            EmptyScreen()
+//            AboutScreen()
         }
     }
 }

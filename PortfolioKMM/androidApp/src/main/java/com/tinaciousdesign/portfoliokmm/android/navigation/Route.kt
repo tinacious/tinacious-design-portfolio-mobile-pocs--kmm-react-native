@@ -2,6 +2,7 @@ package com.tinaciousdesign.portfoliokmm.android.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Build
+import androidx.compose.material.icons.outlined.DataObject
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.ShoppingBasket
 import androidx.compose.material3.Icon
@@ -17,7 +18,7 @@ sealed class Route {
     abstract val title: String
 
     @Serializable
-    data object PortfolioScreen : Route() {
+    data object PortfolioRoute : Route() {
         override val title: String get() = "Portfolio"
 
         override val icon: @Composable () -> Unit
@@ -25,7 +26,7 @@ sealed class Route {
     }
 
     @Serializable
-    data class PortfolioDetailScreen(
+    data class PortfolioDetailRoute(
         val portfolioItemJson: String,
 //        val portfolioItem: PortfolioItem,
     ) : Route() {
@@ -38,7 +39,7 @@ sealed class Route {
     }
 
     @Serializable
-    data object ServicesScreen : Route() {
+    data object ServicesRoute : Route() {
         override val title: String get() = "Services"
 
         override val icon: @Composable () -> Unit
@@ -47,7 +48,7 @@ sealed class Route {
 
 
     @Serializable
-    data object TechnologiesScreen : Route() {
+    data object TechnologiesRoute : Route() {
         override val title: String get() = "Technologies"
 
         override val icon: @Composable () -> Unit
@@ -55,9 +56,21 @@ sealed class Route {
     }
 
     @Serializable
-    data object AboutScreen : Route() {
+    data object AboutRoute : Route() {
         override val title: String get() = "About"
 
+        val externalUrl: String = "https://tinaciousdesign.com"
+
         override val icon: @Composable () -> Unit = { TinaciousDesignIcon() }
+    }
+
+    @Serializable
+    data object CodeRoute : Route() {
+        override val title: String get() = "Code"
+
+        val externalUrl: String = "https://github.com/tinacious/tinacious-design-portfolio-mobile-pocs/tree/main/PortfolioKMM"
+
+        override val icon: @Composable () -> Unit
+            get() = { Icon(imageVector = Icons.Outlined.DataObject, contentDescription = TechnologiesRoute.title) }
     }
 }
