@@ -4,20 +4,24 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.ShoppingBasket
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import com.tinaciousdesign.portfoliokmm.android.icons.TinaciousDesignIcon
 import com.tinaciousdesign.portfoliokmm.networking.responses.PortfolioItem
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 sealed class Route {
-    abstract val icon: ImageVector
+    abstract val icon: @Composable () -> Unit
     abstract val title: String
 
     @Serializable
     data object PortfolioScreen : Route() {
         override val title: String get() = "Portfolio"
-        override val icon: ImageVector get() = Icons.Outlined.Palette
+
+        override val icon: @Composable () -> Unit
+            get() = { Icon(imageVector = Icons.Outlined.Palette, contentDescription = title) }
     }
 
     @Serializable
@@ -26,7 +30,9 @@ sealed class Route {
 //        val portfolioItem: PortfolioItem,
     ) : Route() {
         override val title: String get() = portfolioItem?.title ?: "Portfolio"
-        override val icon: ImageVector get() = Icons.Outlined.Palette
+
+        override val icon: @Composable () -> Unit
+            get() = { Icon(imageVector = Icons.Outlined.Palette, contentDescription = title) }
 
         private val portfolioItem: PortfolioItem? get() = PortfolioItem.fromJson(portfolioItemJson)
     }
@@ -34,12 +40,24 @@ sealed class Route {
     @Serializable
     data object ServicesScreen : Route() {
         override val title: String get() = "Services"
-        override val icon: ImageVector get() = Icons.Outlined.ShoppingBasket
+
+        override val icon: @Composable () -> Unit
+            get() = { Icon(imageVector = Icons.Outlined.ShoppingBasket, contentDescription = title) }
     }
+
 
     @Serializable
     data object TechnologiesScreen : Route() {
         override val title: String get() = "Technologies"
-        override val icon: ImageVector get() = Icons.Outlined.Build
+
+        override val icon: @Composable () -> Unit
+            get() = { Icon(imageVector = Icons.Outlined.Build, contentDescription = title) }
+    }
+
+    @Serializable
+    data object AboutScreen : Route() {
+        override val title: String get() = "About"
+
+        override val icon: @Composable () -> Unit = { TinaciousDesignIcon() }
     }
 }

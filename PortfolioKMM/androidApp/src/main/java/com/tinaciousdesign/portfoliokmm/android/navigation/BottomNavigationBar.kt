@@ -1,11 +1,9 @@
 package com.tinaciousdesign.portfoliokmm.android.navigation
 
-import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -18,6 +16,7 @@ fun BottomNavigationBar(navController: NavController) {
         Route.PortfolioScreen,
         Route.ServicesScreen,
         Route.TechnologiesScreen,
+        Route.AboutScreen,
     )
     var selectedItem by remember { mutableIntStateOf(0) }
 
@@ -25,7 +24,7 @@ fun BottomNavigationBar(navController: NavController) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 alwaysShowLabel = true,
-                icon = { Icon(item.icon, contentDescription = item.title) },
+                icon = item.icon,
                 label = { Text(item.title) },
                 selected = selectedItem == index,
                 onClick = {

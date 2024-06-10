@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.tinaciousdesign.portfoliokmm.ApiUtils
+import com.tinaciousdesign.portfoliokmm.android.screens.AboutScreen
 import com.tinaciousdesign.portfoliokmm.android.screens.HomeScreen
 import com.tinaciousdesign.portfoliokmm.android.screens.PortfolioDetailScreen
 import com.tinaciousdesign.portfoliokmm.android.screens.ServicesScreen
@@ -49,6 +50,10 @@ fun NavigationRouter(
             TechnologiesScreen(
                 apiUtils = apiUtils,
             )
+        }
+
+        composable<Route.AboutScreen> {
+            AboutScreen()
         }
     }
 }
