@@ -34,7 +34,7 @@ fun NavigationRouter(
         }
         composable<Route.PortfolioDetailScreen> { backStackEntry ->
             val route = backStackEntry.toRoute<Route.PortfolioDetailScreen>()
-            PortfolioDetailScreen(route.portfolioItemJson)
+            PortfolioDetailScreen(route.portfolioItemJson, navController)
         }
 
         composable<Route.ServicesScreen> {

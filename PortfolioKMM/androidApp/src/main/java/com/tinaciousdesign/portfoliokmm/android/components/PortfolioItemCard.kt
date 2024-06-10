@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.tinaciousdesign.portfoliokmm.android.utils.showEscapedCharacters
 import com.tinaciousdesign.portfoliokmm.networking.responses.PortfolioItem
 
 @Composable
@@ -42,8 +43,9 @@ fun PortfolioItemCard(
                     bottom = 0.dp,
                 ),
         )
+
         Text(
-            text = portfolioItem.excerptHtml,
+            text = portfolioItem.excerptHtml.showEscapedCharacters(),
             fontSize = 16.sp,
             modifier = Modifier
                 .padding(

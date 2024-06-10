@@ -4,6 +4,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -19,6 +20,17 @@ fun BottomNavigationBar(navController: NavController) {
         Route.AboutScreen,
     )
     var selectedItem by remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(key1 = 1) {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            items.forEachIndexed { index, navigationItem ->
+                // todo: this won't work with proguard / R8
+                if (navigationItem.javaClass.simpleName == destination.route?.split(".")?.last()) {
+                    selectedItem = index
+                }
+            }
+        }
+    }
 
     NavigationBar {
         items.forEachIndexed { index, item ->
