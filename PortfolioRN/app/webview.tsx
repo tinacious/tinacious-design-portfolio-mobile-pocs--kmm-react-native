@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Appearance, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/core';
 import WebView from 'react-native-webview';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ViewProps } from '@/components/Themed';
+import * as WebBrowser from 'expo-web-browser'
 
 type WebViewScreenProps = ViewProps & {};
 
@@ -16,9 +17,16 @@ const WebViewScreen: FC<WebViewScreenProps> = ({
   const route = useRoute()
   const url = (route.params as { url?: string })?.url
 
+  // expo-web-browser
+  /*useEffect(() => {
+    if (!url) return
+    WebBrowser.openBrowserAsync(url)
+  }, [url])
+  return null */
+
+  // react-native-webview
   // const colorScheme = Appearance.getColorScheme()
   // const timestamp = (new Date()).getTime()
-
   if (!url) return null
 
   return (
